@@ -1,0 +1,256 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-08-28T12:00:00Z",
+  "swaggerSource": "https://contrada-back-test.sovcombank.ru/docs?api-docs.json",
+  "swaggerHash": null,
+  "contractStatus": "missing",
+  "schemaValidation": {
+    "status": "not-run",
+    "reason": "autotest-cli-data/contracts/swagger.json is not available"
+  },
+  "providerVerification": {
+    "status": "not-run",
+    "reason": "provider and cached contract are unavailable"
+  },
+  "seed": 481516,
+  "mockNow": "2026-08-28T12:00:00Z",
+  "endpoints": [
+    {
+      "path": "/api/v1/news",
+      "method": "GET",
+      "tag": "Новости",
+      "scenarios": ["success", "empty", "notFound"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#newsFixtures",
+      "handler": "../handlers.ts#news",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1news/get",
+        "schema": "news_resource",
+        "businessRules": ["news-dates", "is-active-string"]
+      }
+    },
+    {
+      "path": "/api/v1/news/{slug}",
+      "method": "GET",
+      "tag": "Новости",
+      "scenarios": ["success", "notFound"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#newsFixtures",
+      "handler": "../handlers.ts#newsBySlug",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1news~1{slug}/get",
+        "schema": "news_resource",
+        "businessRules": ["news-dates", "is-active-string"]
+      }
+    },
+    {
+      "path": "/api/v1/pages/{id_or_name}",
+      "method": "GET",
+      "tag": "Типовые страницы",
+      "scenarios": ["success", "notFound"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#pageFixtures",
+      "handler": "../handlers.ts#pages",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1pages~1{id_or_name}/get",
+        "schema": "PageResourceNew",
+        "businessRules": ["url-format"]
+      }
+    },
+    {
+      "path": "/api/v1/graphs",
+      "method": "GET",
+      "tag": "Графики",
+      "scenarios": ["success", "empty"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#graphFixtures",
+      "handler": "../handlers.ts#graphs",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1graphs/get",
+        "schema": "GraphResource",
+        "businessRules": ["graph-dates", "pie-price", "yield-ranges", "graph-type"]
+      }
+    },
+    {
+      "path": "/api/v1/graphs/type/{type_name}",
+      "method": "GET",
+      "tag": "Графики",
+      "scenarios": ["success", "empty"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#graphFixtures",
+      "handler": "../handlers.ts#graphsByType",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1graphs~1type~1{type_name}/get",
+        "schema": "GraphResource",
+        "businessRules": ["graph-dates", "pie-price", "yield-ranges", "graph-type"]
+      }
+    },
+    {
+      "path": "/api/v1/subscriptions",
+      "method": "POST",
+      "tag": "Подписки",
+      "scenarios": ["success", "duplicate", "validation"],
+      "stateful": true,
+      "state": "subscriptions",
+      "fixtures": "fixtures.ts#subscriptionFixtures",
+      "handler": "../handlers.ts#subscriptions",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1subscriptions/post",
+        "schema": "form_sender_resource",
+        "businessRules": ["email-format", "email-unique"]
+      }
+    },
+    {
+      "path": "/api/v1/unsubscribe",
+      "method": "POST",
+      "tag": "Подписки",
+      "scenarios": ["success", "notFound"],
+      "stateful": true,
+      "state": "subscriptions",
+      "fixtures": "fixtures.ts#subscriptionFixtures",
+      "handler": "../handlers.ts#unsubscribe",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1unsubscribe/post",
+        "schema": "form_sender_resource",
+        "businessRules": ["email-format"]
+      }
+    },
+    {
+      "path": "/api/v1/feedback_forms",
+      "method": "GET",
+      "tag": "Формы",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#feedbackFormFixtures",
+      "handler": "../handlers.ts#feedbackForms",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1feedback_forms/get",
+        "schema": "feedback_forms_resource",
+        "businessRules": ["is-active-string"]
+      }
+    },
+    {
+      "path": "/api/v1/feedback_forms",
+      "method": "POST",
+      "tag": "Формы",
+      "scenarios": ["success", "validation"],
+      "stateful": true,
+      "state": "feedback",
+      "fixtures": "fixtures.ts#feedbackFormFixtures",
+      "handler": "../handlers.ts#feedbackForms",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1feedback_forms/post",
+        "schema": "form_sender_resource",
+        "businessRules": ["email-format"]
+      }
+    },
+    {
+      "path": "/api/v1/banners",
+      "method": "GET",
+      "tag": "Баннеры",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#bannerFixtures",
+      "handler": "../handlers.ts#banners",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1banners/get",
+        "schema": "banner_resource",
+        "businessRules": ["is-active-string"]
+      }
+    },
+    {
+      "path": "/api/v1/contacts",
+      "method": "GET",
+      "tag": "Контакты",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#contactFixtures",
+      "handler": "../handlers.ts#contacts",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1contacts/get",
+        "schema": "contact_resource",
+        "businessRules": []
+      }
+    },
+    {
+      "path": "/api/v1/settings",
+      "method": "GET",
+      "tag": "Настройки",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#settingsFixtures",
+      "handler": "../handlers.ts#settings",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1settings/get",
+        "schema": "settings_resource",
+        "businessRules": []
+      }
+    },
+    {
+      "path": "/api/v1/top10",
+      "method": "GET",
+      "tag": "Топ-10",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#top10Fixtures",
+      "handler": "../handlers.ts#top10",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1top10/get",
+        "schema": "top10_resource",
+        "businessRules": ["isin-format"]
+      }
+    },
+    {
+      "path": "/api/v1/about",
+      "method": "GET",
+      "tag": "О компании",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#aboutFixtures",
+      "handler": "../handlers.ts#about",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1about/get",
+        "schema": "about_resource",
+        "businessRules": []
+      }
+    },
+    {
+      "path": "/api/v1/healthcheck",
+      "method": "GET",
+      "tag": "Healthcheck",
+      "scenarios": ["success"],
+      "stateful": false,
+      "fixtures": "fixtures.ts#healthcheckFixtures",
+      "handler": "../handlers.ts#healthcheck",
+      "provenance": {
+        "openapiPath": "#/paths/~1api~1v1~1healthcheck/get",
+        "schema": null,
+        "businessRules": []
+      }
+    }
+  ],
+  "assumptions": [
+    "is_active — строка \"1\"/\"0\", не boolean (подтверждено Swagger + frontend code)",
+    "Пагинация в стиле Laravel: { data, links, meta }",
+    "Даты в формате ISO 8601 (UTC)",
+    "Даты в графиках — DD.MM.YYYY",
+    "ISIN формат: RU + 12 символов",
+    "РСП (piePrice) в диапазоне 5000–50000",
+    "СЧА (nav) — положительное число (миллионы рублей)",
+    "Доходность за 5 лет: 100–200% для фондов акций"
+  ],
+  "conflicts": [
+    {
+      "field": "is_active",
+      "swaggerType": "string",
+      "frontendType": "string",
+      "resolution": "Используем string \"1\"/\"0\" (согласовано)"
+    },
+    {
+      "field": "graph_type",
+      "swaggerType": "string | null",
+      "frontendType": "string | null",
+      "resolution": "Используем string | null (согласовано)"
+    }
+  ]
+}

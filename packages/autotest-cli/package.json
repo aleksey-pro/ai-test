@@ -1,0 +1,29 @@
+{
+  "name": "@invest-fund/autotest-cli",
+  "version": "0.0.1",
+  "description": "Installer for the Invest Fund TestIt to Playwright automation flow",
+  "type": "module",
+  "bin": {
+    "autotest": "./bin/autotest.mjs"
+  },
+  "files": [
+    "bin",
+    "run.mjs",
+    ".agents"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Aleksey Isaev <isaevav1@sovcombank.ru>",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://nexus.sovcombank.group/repository/invest-fund/"
+  },
+  "scripts": {
+    "release": "npm run check && npm test && npm publish",
+    "check": "node --check bin/autotest.mjs && node --check run.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "pack:check": "npm pack --dry-run"
+  }
+}
